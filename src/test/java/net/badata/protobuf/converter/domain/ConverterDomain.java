@@ -206,8 +206,6 @@ public class ConverterDomain {
 		private float floatValue;
 		@ProtoField
 		private double doubleValue;
-//		@ProtoField
-//		private boolean booleanValue;
 
 		public long getLongValue() {
 			return longValue;
@@ -240,14 +238,6 @@ public class ConverterDomain {
 		public void setDoubleValue(final double doubleValue) {
 			this.doubleValue = doubleValue;
 		}
-
-//		public boolean isBooleanValue() {
-//			return booleanValue;
-//		}
-//
-//		public void setBooleanValue(final boolean booleanValue) {
-//			this.booleanValue = booleanValue;
-//		}
 	}
 
 	@ProtoClass(ConverterProto.FieldConverterTest.class)
