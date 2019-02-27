@@ -64,7 +64,6 @@ public class ConverterTest {
 
 	private void createTestDomain() {
 		ConverterDomain.PrimitiveTest primitiveTest = new ConverterDomain.PrimitiveTest();
-		primitiveTest.setBooleanValue(true);
 		primitiveTest.setFloatValue(-0.2f);
 		primitiveTest.setDoubleValue(-0.6);
 		primitiveTest.setIntValue(-101);
@@ -79,6 +78,7 @@ public class ConverterTest {
 
 		testDomain = new ConverterDomain.Test();
 		testDomain.setBoolValue(false);
+		testDomain.setBooleanValue(true);
 		testDomain.setFloatValue(0.2f);
 		testDomain.setDoubleValue(0.6);
 		testDomain.setIntValue(101);
@@ -105,8 +105,8 @@ public class ConverterTest {
 
 	private void createIgnoredFieldsMap() {
 		fieldsIgnore = new FieldsIgnore();
-		fieldsIgnore.add(ConverterDomain.PrimitiveTest.class);
-		fieldsIgnore.add(ConverterDomain.FieldConverterTest.class, "enumString");
+		fieldsIgnore.add(ConverterDomain.PrimitiveTest.class, "doubleValue");
+		fieldsIgnore.add(ConverterDomain.FieldConverterTest.class);
 		fieldsIgnore.add(ConverterDomain.Test.class, "boolValue");
 	}
 
@@ -131,7 +131,7 @@ public class ConverterTest {
 		Assert.assertEquals(primitiveProto.getIntValue(), primitiveDomain.getIntValue());
 		Assert.assertEquals(primitiveProto.getFloatValue(), primitiveDomain.getFloatValue(), 0f);
 		Assert.assertEquals(primitiveProto.getDoubleValue(), primitiveDomain.getDoubleValue(), 0);
-		Assert.assertEquals(primitiveProto.getBooleanValue(), primitiveDomain.isBooleanValue());
+		Assert.assertEquals(primitiveProto.getBooleanValue(), result.isBooleanValue());
 
 		ConverterProto.FieldConverterTest conversionProto = testProtobuf.getFieldConversionValue();
 		ConverterDomain.FieldConverterTest conversionDomain = result.getFieldConversionValue();
@@ -155,7 +155,7 @@ public class ConverterTest {
 		Assert.assertEquals(testProtobuf.getComplexSetValue(0).getIntValue(),
 				result.getComplexSetValue().iterator().next().getIntValue());
 
-		Assert.assertTrue(result.getComplexNullableCollectionValue().isEmpty());
+		Assert.assertNull(result.getComplexNullableCollectionValue());
 
 		Assert.assertEquals(testProtobuf.getBytesValue(), result.getBytesValue());
 		Assert.assertEquals((Object) testProtobuf.getRecursiveValue().getIntValue(), result.getRecursiveValue().getIntValue());
@@ -170,9 +170,8 @@ public class ConverterTest {
 		Assert.assertNotNull(result);
 
 		Assert.assertNull(result.getBoolValue());
-		Assert.assertNull(result.getPrimitiveValue());
-		Assert.assertNull(result.getFieldConversionValue().getEnumString());
-		Assert.assertNull(result.getComplexListValue());
+		Assert.assertEquals(0, result.getPrimitiveValue().getDoubleValue(), 0);
+		Assert.assertNull(result.getFieldConversionValue());
 	}
 
 
@@ -197,7 +196,7 @@ public class ConverterTest {
 		Assert.assertEquals(primitiveDomain.getIntValue(), primitiveProto.getIntValue());
 		Assert.assertEquals(primitiveDomain.getFloatValue(), primitiveProto.getFloatValue(), 0f);
 		Assert.assertEquals(primitiveDomain.getDoubleValue(), primitiveProto.getDoubleValue(), 0);
-		Assert.assertEquals(primitiveDomain.isBooleanValue(), primitiveProto.getBooleanValue());
+		Assert.assertEquals(testDomain.isBooleanValue(), primitiveProto.getBooleanValue());
 
 		ConverterProto.FieldConverterTest conversionProto = result.getFieldConversionValue();
 		ConverterDomain.FieldConverterTest conversionDomain = testDomain.getFieldConversionValue();
@@ -227,9 +226,8 @@ public class ConverterTest {
 		Assert.assertNotNull(result);
 
 		Assert.assertFalse(result.getBooleanValue());
-		Assert.assertFalse(result.hasPrimitiveValue());
-		Assert.assertEquals("", result.getFieldConversionValue().getEnumString());
-		Assert.assertTrue(result.getComplexListValueList().isEmpty());
+		Assert.assertFalse(result.hasFieldConversionValue());
+		Assert.assertEquals(0, result.getPrimitiveValue().getDoubleValue(), 0);
 	}
 
 }

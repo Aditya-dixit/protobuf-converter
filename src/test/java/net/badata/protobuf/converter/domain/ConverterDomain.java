@@ -61,7 +61,17 @@ public class ConverterDomain {
 		private ByteString bytesValue;
 		@ProtoField
 		private Test recursiveValue;
+		@ProtoField(mappedTo = "primitiveValue")
+		private boolean booleanValue;
 
+
+		public boolean isBooleanValue() {
+			return booleanValue;
+		}
+
+		public void setBooleanValue(boolean booleanValue) {
+			this.booleanValue = booleanValue;
+		}
 
 		public Long getLongValue() {
 			return longValue;
@@ -196,8 +206,8 @@ public class ConverterDomain {
 		private float floatValue;
 		@ProtoField
 		private double doubleValue;
-		@ProtoField
-		private boolean booleanValue;
+//		@ProtoField
+//		private boolean booleanValue;
 
 		public long getLongValue() {
 			return longValue;
@@ -231,13 +241,13 @@ public class ConverterDomain {
 			this.doubleValue = doubleValue;
 		}
 
-		public boolean isBooleanValue() {
-			return booleanValue;
-		}
-
-		public void setBooleanValue(final boolean booleanValue) {
-			this.booleanValue = booleanValue;
-		}
+//		public boolean isBooleanValue() {
+//			return booleanValue;
+//		}
+//
+//		public void setBooleanValue(final boolean booleanValue) {
+//			this.booleanValue = booleanValue;
+//		}
 	}
 
 	@ProtoClass(ConverterProto.FieldConverterTest.class)

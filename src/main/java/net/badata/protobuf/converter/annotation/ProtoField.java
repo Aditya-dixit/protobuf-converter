@@ -49,4 +49,11 @@ public @interface ProtoField {
 	 * @return Class for null check.
 	 */
 	Class<? extends NullValueInspector> nullValue() default DefaultNullValueInspectorImpl.class;
+
+	/**
+	 * Retrieve the object field is mapped to in case of nested object
+	 * 
+	 * @return Name of the object the field is a part of.
+	 */
+	String mappedTo() default "";
 }
