@@ -69,5 +69,7 @@ public interface FieldResolver {
 	 * @return instance of default value generator.
 	 */
 	DefaultValue getDefaultValue();
+	
+	String getMappedTo();
 
 }

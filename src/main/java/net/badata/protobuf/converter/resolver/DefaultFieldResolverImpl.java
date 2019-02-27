@@ -25,6 +25,7 @@ public class DefaultFieldResolverImpl implements FieldResolver {
 	private TypeConverter<?, ?> converter;
 	private NullValueInspector nullValueInspector;
 	private DefaultValue defaultValue;
+	private String mappedTo;
 
 
 	/**
@@ -145,6 +146,14 @@ public class DefaultFieldResolverImpl implements FieldResolver {
 	 */
 	public void setDefaultValue(final DefaultValue defaultValue) {
 		this.defaultValue = defaultValue;
+	}
+
+	public String getMappedTo() {
+		return mappedTo;
+	}
+
+	public void setMappedTo(String mappedTo) {
+		this.mappedTo = mappedTo;
 	}
 }
 

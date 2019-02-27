@@ -44,6 +44,7 @@ public class AnnotatedFieldResolverFactoryImpl implements FieldResolverFactory {
 		resolver.setConverter(AnnotationUtils.createTypeConverter(annotation));
 		resolver.setNullValueInspector(AnnotationUtils.createNullValueInspector(annotation));
 		resolver.setDefaultValue(AnnotationUtils.createDefaultValue(annotation));
+		resolver.setMappedTo(annotation.mappedTo());
 	}
 
 }

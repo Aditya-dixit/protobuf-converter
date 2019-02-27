@@ -22,6 +22,7 @@ public final class FieldUtils {
 	private static final String BOOLEAN_GETTER_PREFIX = "is";
 	private static final String PROTOBUF_LIST_GETTER_POSTFIX = "List";
 	private static final String PROTOBUF_LIST_SETTER_PREFIX = "addAll";
+	private static final String PROTOBUF_BUILDER_SUFFIX = "Builder";
 
 	/**
 	 * Check whether field has own mapper.
@@ -162,7 +163,38 @@ public final class FieldUtils {
 		}
 		return defaultType;
 	}
+	
+	
+	/**
+     * Create protobuf getter name for domain field.
+     *
+     * @param fieldResolver Domain object field resolver.
+     * @return Protobuf field getter name.
+     */
+    public static String createDomainGetterNameMappedField(final String mappedTo, Class<?> protobufType) {
+        String getterName = StringUtils.createMethodName(GETTER_PREFIX, mappedTo);
+        if (isCollectionType(protobufType)) {
+            return getterName + PROTOBUF_LIST_GETTER_POSTFIX;
+        }
+        return getterName;
+    }
 
+    
+    /**
+     * Create protobuf builder getter name.
+     *
+     * @param field field name
+     * protobufType
+     * @return Domain field getter name.
+     */ 
+    
+    public static String createProtobufGetterNameMappedField(final String field, Class<?> protobufType) {
+      String getterName = StringUtils.createMethodName(GETTER_PREFIX, field);
+      if (isCollectionType(protobufType)) {
+          return getterName + PROTOBUF_LIST_GETTER_POSTFIX;
+      }
+      return getterName + PROTOBUF_BUILDER_SUFFIX;
+  }
 	private FieldUtils() {
 		// empty
 	}
